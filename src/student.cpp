@@ -67,6 +67,12 @@ using namespace std;
 //     preorder(&satu);      // mencetak:  42
 // =============================================================================
 void preorder(const Node* root) {
+    if (root != NULL) {
+        const Node* temp = root;
+        cout << temp->data << " ";
+        preorder(temp->left);
+        preorder(temp->right);
+    }
 }
 
 // =============================================================================
@@ -90,6 +96,12 @@ void preorder(const Node* root) {
 //     inorder(NULL);     // tidak mencetak apa pun
 // =============================================================================
 void inorder(const Node* root) {
+    if (root != NULL) {
+        const Node* temp = root;
+        inorder(temp->left);
+        cout << temp->data << " ";
+        inorder(temp->right);
+    }
 }
 
 // =============================================================================
@@ -114,6 +126,12 @@ void inorder(const Node* root) {
 //     postorder(NULL);   // tidak mencetak apa pun
 // =============================================================================
 void postorder(const Node* root) {
+    if (root != NULL) {
+        const Node* temp = root;
+        postorder(temp->left);
+        postorder(temp->right);
+        cout << temp->data << " ";
+    }
 }
 
 // =============================================================================
@@ -140,6 +158,17 @@ void postorder(const Node* root) {
 //     clear(root);              // aman, tidak terjadi apa-apa
 // =============================================================================
 void clear(Node*& root) {
+    if (root != NULL) {
+        Node* temp = root;
+        root = temp->left;
+        clear(root);
+
+        root = temp->right;
+        clear(root);
+
+        delete temp;
+        root = NULL;
+    }
 }
 
 // =============================================================================
@@ -177,7 +206,13 @@ void clear(Node*& root) {
 //     3                           masih punya satu cabang)
 // =============================================================================
 int jumlahDaun(const Node* root) {
-    return 0;
+    if (root == NULL) {
+        return 0;
+    } 
+    if (root->left == NULL && root->right == NULL) {
+        return 1;
+    }
+    return jumlahDaun(root->left) + jumlahDaun(root->right);
 }
 
 // =============================================================================
